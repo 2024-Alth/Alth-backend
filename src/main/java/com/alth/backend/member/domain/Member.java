@@ -30,7 +30,7 @@ public class Member extends BaseTimeEntity {
 
     private int birth;
 
-    private Boolean enjoyDrink;
+    private boolean enjoyDrink;
 
     private String favorLiquor;
 
