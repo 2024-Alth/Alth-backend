@@ -1,9 +1,5 @@
 spring:
 
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
   h2:
     console:
       enabled: true
@@ -24,6 +20,10 @@ spring:
         default_batch_fetch_size: 100
         format_sql: true
     defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
 
   servlet:
     multipart:
