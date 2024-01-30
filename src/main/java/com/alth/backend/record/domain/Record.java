@@ -13,7 +13,7 @@ import org.hibernate.annotations.Where;
 @Builder
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE record SET is_deleted = true WHERE record_id = ?")
+@SQLDelete(sql = "UPDATE record SET is_deleted = true WHERE record_id =  ?")
 @Where(clause = "is_deleted = false")
 @ToString
 public class Record extends BaseTimeEntity {
