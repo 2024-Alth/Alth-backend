@@ -34,7 +34,8 @@ public class Member extends BaseTimeEntity {
 
     private boolean activated;
 
-    private boolean enjoyDrink;
+    @Enumerated(value = EnumType.STRING)
+    private EnjoyDrink enjoyDrink;
 
     private String favorLiquor;
 
@@ -46,4 +47,12 @@ public class Member extends BaseTimeEntity {
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     @ManyToMany
     private Set<Authority> authorities;
+
+    public void update(String nickname, int birth, String name, EnjoyDrink enjoyDrink, String favorLiquor) {
+        this.name = name;
+        this.nickname = nickname;
+        this.birth = birth;
+        this.enjoyDrink = enjoyDrink;
+        this.favorLiquor = favorLiquor;
+    }
 }
