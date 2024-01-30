@@ -36,7 +36,7 @@ public class Record extends BaseTimeEntity {
         ALIVE,
         LITTLE,
         FULLY,
-        DEATH; //sat as 4 type(changeable)
+        DEATH //sat as 4 type(changeable)
     }
 
     public void delete() {
