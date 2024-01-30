@@ -1,5 +1,6 @@
 package com.alth.backend.member.dto;
 
+import com.alth.backend.member.domain.EnjoyDrink;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Schema(description = "Member signIn request")
 public class MemberSignInRequest {
-
     @Email
     @NotBlank
     @Schema(description = "사용자 이메일", nullable = false, example = "mr6208@naver.com")
@@ -38,8 +38,8 @@ public class MemberSignInRequest {
     private int birth;
 
     @NotNull
-    @Schema(description = "사용자 음주, 금주(절주) 여부", nullable = false, example = "true")
-    private boolean enjoyDrink;
+    @Schema(description = "사용자 음주, 금주(절주) 여부", nullable = false, example = "DRINK")
+    private EnjoyDrink enjoyDrink;
 
     @NotBlank
     @Schema(description = "사용자 선호 주류", nullable = false, example = "소주")
