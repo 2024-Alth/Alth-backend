@@ -32,9 +32,9 @@ public class RecordController {
         return ResponseEntity.ok(recordService.findOneRecord(id));
     }
 
-    @PutMapping("/user/record")    //U -> /{id} 제외
-    public ResponseEntity<RecordResponseDto> updateRecord(@RequestBody RecordUpdateDto request){
-        return ResponseEntity.ok(recordService.updateRecord(request));
+    @PutMapping("/user/record/{recId}")    //U
+    public ResponseEntity<RecordResponseDto> updateRecord(@RequestBody RecordUpdateDto request, @PathVariable Long recId){
+        return ResponseEntity.ok(recordService.updateRecord(request, recId));
     }
 
     @DeleteMapping("/user/record/{id}") //D

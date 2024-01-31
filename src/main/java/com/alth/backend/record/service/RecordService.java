@@ -47,11 +47,13 @@ public class RecordService {
 
     //U
     @Transactional
-    public RecordResponseDto updateRecord(RecordUpdateDto request){
+    public RecordResponseDto updateRecord(RecordUpdateDto request, Long recId){
+        recId = request.getRecordId(); // recordId in recId - for uri mapping(in Record Update)
+
         Record record = recordRepository.findById(request.getRecordId()) //find
                 .orElseThrow(IllegalStateException::new); // exception
 
-        record.updateRecord(record.getAlCnt(), record.getHangOver(), record.getRecordMemo()); // update
+        record.updateRecord(request.getAlCnt(), request.getHangOver(), request.getRecordMemo()); // update
 
         return recordMapper.toResponse(record);
     }
