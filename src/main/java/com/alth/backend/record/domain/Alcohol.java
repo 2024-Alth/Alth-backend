@@ -20,6 +20,10 @@ public class Alcohol {
     @Column(nullable = false, updatable = false)
     private Long alcoholId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "record_id")
+    private Record record;
+
     @Column(length = 50, nullable = false)
     private String alcoholName;
 
@@ -31,9 +35,6 @@ public class Alcohol {
 
     @Enumerated(EnumType.STRING)
     private Type alcoholType;
-
-    @OneToMany(mappedBy = "alcohol")
-    private List<Record> records = new ArrayList<>();
 
 
     public enum Type {

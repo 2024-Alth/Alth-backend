@@ -7,6 +7,9 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -32,9 +35,9 @@ public class Record extends BaseTimeEntity {
 
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "alcohol_id")
-    private Alcohol alcohol;
+    @Builder.Default
+    @OneToMany(mappedBy = "record", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Alcohol> alcohols = new ArrayList<>();
 
 
     public enum Feels {
