@@ -32,6 +32,11 @@ public class Record extends BaseTimeEntity {
 
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "alcohol_id")
+    private Alcohol alcohol;
+
+
     public enum Feels {
         ALIVE,
         LITTLE,
