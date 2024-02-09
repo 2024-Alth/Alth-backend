@@ -12,6 +12,6 @@ public class MemberResponse {
     private String nickname;
     private String email;
     private int birth;
-    private boolean enjoyDrink;
+    private String enjoyDrink;
     private String favorLiquor;
 }

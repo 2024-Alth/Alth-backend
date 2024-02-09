@@ -6,6 +6,7 @@ import com.alth.backend.member.MemberRepository;
 import com.alth.backend.member.domain.Member;
 import com.alth.backend.member.dto.MemberResponse;
 import com.alth.backend.member.dto.MemberSignInRequest;
+import com.alth.backend.member.dto.MemberUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,11 +31,34 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public MemberResponse getMember() {
+    public MemberResponse getMemberInfo() {
         return memberMapper.toResponse(
                 SecurityUtil.getCurrentUsername()
                         .flatMap(memberRepository::findOneWithAuthoritiesByEmail)
                         .orElseThrow(() -> new RuntimeException("조회하지 못했습니다."))
         );
+    }
+
+    public Member getMember() {
+        return SecurityUtil.getCurrentUsername()
+                .flatMap(memberRepository::findOneWithAuthoritiesByEmail)
+                .orElseThrow(() -> new RuntimeException("조회하지 못했습니다"));
+    }
+
+    @Transactional
+    public MemberResponse update(MemberUpdateRequest request) {
+
+        Member member = getMember();
+        member.update(request.getNickname(), request.getBirth(), request.getName(),
+                request.getEnjoyDrink(), request.getFavorLiquor());
+
+        return memberMapper.toResponse(member);
+    }
+
+    public String delete() {
+        Member member = getMember();
+
+        memberRepository.delete(member);
+        return "탈퇴되었습니다.";
     }
 }
