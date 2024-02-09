@@ -1,7 +1,10 @@
 package com.alth.backend.record.dto.request;
 
+import com.alth.backend.record.domain.Alcohol;
 import com.alth.backend.record.domain.Record;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -12,4 +15,5 @@ public class RecordRequestDto {
     private int alCnt;
     private Record.Feels hangOver;
     private String recordMemo;
+    private List<Alcohol> alcohols;
 }

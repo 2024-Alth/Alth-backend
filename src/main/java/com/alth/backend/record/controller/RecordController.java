@@ -1,10 +1,9 @@
 package com.alth.backend.record.controller;
 
-import com.alth.backend.record.dto.response.RecordResponseDto;
-import com.alth.backend.record.dto.response.RecordResponseIdDto;
-import com.alth.backend.record.dto.response.RecordResponseListDto;
+import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
 import com.alth.backend.record.dto.request.RecordUpdateDto;
+import com.alth.backend.record.repository.AlcoholRepository;
 import com.alth.backend.record.service.RecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +26,14 @@ public class RecordController {
         return ResponseEntity.ok(recordService.findAll());
     }
 
-    @GetMapping("/user/record/{id}")    //R
+    @GetMapping("/user/record/{id}")    //R - each of Record
     public ResponseEntity<RecordResponseDto> findOneRecord(@PathVariable Long id){
         return ResponseEntity.ok(recordService.findOneRecord(id));
+    }
+
+    @GetMapping("/user/record/{id}/alcohols") // R - List of Alcohol in One Record
+    public ResponseEntity<AlcoholResponseListDto> findAlcoholEachRecord(@PathVariable Long id){
+        return ResponseEntity.ok(recordService.findAlcoholEachRecord(id));
     }
 
     @PutMapping("/user/record/{recId}")    //U

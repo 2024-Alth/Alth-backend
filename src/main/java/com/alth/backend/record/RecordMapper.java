@@ -1,9 +1,9 @@
 package com.alth.backend.record;
 
+import com.alth.backend.record.domain.Alcohol;
 import com.alth.backend.record.domain.Record;
-import com.alth.backend.record.dto.response.RecordResponseDto;
-import com.alth.backend.record.dto.response.RecordResponseIdDto;
-import com.alth.backend.record.dto.response.RecordResponseListDto;
+import com.alth.backend.record.dto.request.AlcoholRequestDto;
+import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +18,12 @@ public class RecordMapper {
                 .alCnt(request.getAlCnt())
                 .hangOver(request.getHangOver())
                 .recordMemo(request.getRecordMemo())
+                .alcohols(request.getAlcohols())
                 .build();
     }
+
+
+
 
     public RecordResponseIdDto toResponseId(Record record){
         return RecordResponseIdDto.builder()
@@ -27,16 +31,19 @@ public class RecordMapper {
                 .build();
     }
 
+
     public RecordResponseDto toResponse(Record record){
         return RecordResponseDto.builder()
                 .recordId(record.getRecordId())
                 .alCnt(record.getAlCnt())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
+                .alcohols(record.getAlcohols())
                 .recordWriteTime(record.getCreatedAt())
                 .recordEditTime(record.getUpdatedAt())
                 .build();
     }
+
 
     public RecordResponseListDto toListResponse(List<Record> recordList){
         List<RecordResponseDto> recordResponseList
