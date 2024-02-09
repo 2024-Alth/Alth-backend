@@ -33,12 +33,16 @@ public class Record extends BaseTimeEntity {
     @Column(length = 500, nullable = false)
     private String recordMemo;
 
+    @Builder.Default
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
 
     @Builder.Default
     @OneToMany(mappedBy = "record", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Alcohol> alcohols = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "record", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<SampleAlcohol> sampleAlcohols = new ArrayList<>();
 
     public enum Feels {
         ALIVE,
@@ -49,6 +53,7 @@ public class Record extends BaseTimeEntity {
 
     public void delete() {
         this.isDeleted = true;
+        this.getAlcohols().forEach(alcohol -> alcohol.delete());
     }
 
     public void updateRecord(int alCnt, Feels hangOver, String recordMemo){
