@@ -4,6 +4,7 @@ import com.alth.backend.record.AlcoholMapper;
 import com.alth.backend.record.RecordMapper;
 import com.alth.backend.record.domain.Alcohol;
 import com.alth.backend.record.domain.Record;
+import com.alth.backend.record.dto.request.AlcoholRequestDto;
 import com.alth.backend.record.dto.request.AlcoholUpdateDto;
 import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
@@ -26,12 +27,22 @@ public class RecordService {
     private final AlcoholMapper alcoholMapper;
 
     //C
-    public RecordResponseIdDto createRecord(RecordRequestDto request){
-        Record record = recordRepository.save(recordMapper.toEntity(request)); //save
-        record.getAlcohols().forEach(alcohol -> alcohol.setRecord(record)); // set alcohol - recordId
-        RecordResponseIdDto recordResponseIdDto = recordMapper.toResponseId(record); //ret
+//    public RecordResponseIdDto createRecord(RecordRequestDto request){
+//        Record record = recordRepository.save(recordMapper.toEntity(request)); //save
+//        record.getAlcohols().forEach(alcohol -> alcohol.setRecord(record)); // set alcohol - recordId
+//        RecordResponseIdDto recordResponseIdDto = recordMapper.toResponseId(record); //ret
+//
+//        return recordResponseIdDto;
+//    }
 
-        return recordResponseIdDto;
+    public void createRecordWithAlcohol(RecordRequestDto request){
+        Record record = recordRepository.save(recordMapper.toEntity(request)); //save - record
+        List<AlcoholRequestDto> alcoholList = request.getAlcoholRequest(); // set AlcoholList
+        for (AlcoholRequestDto alcoholRequestDto: alcoholList){
+            Alcohol alcohol = alcoholRepository.save(alcoholMapper.toAlcoholEntity(alcoholRequestDto));
+            alcohol.setRecord(record);
+        }
+        recordRepository.save(record);
     }
 
     //R - List
@@ -52,13 +63,13 @@ public class RecordService {
 
     // R - List of Alcohol in One Record
     public AlcoholResponseListDto findAlcoholEachRecord(Long id){
-        Alcohol alcohol = alcoholRepository.findByRecId(id)
-                .orElseThrow(IllegalStateException::new);
-        Long recId = alcohol.getRecord().getRecordId();
+        Record record = recordRepository.findById(id)
+                .orElseThrow(IllegalStateException::new); // exception
 
         List<Alcohol> alcohols = alcoholRepository.findAlcoholEachRecord(id);
 
-        return alcoholMapper.toAlcoholsListResponse(alcohols);
+
+        return recordMapper.toAlcoholsListResponse(alcohols);
     }
 
     //U
@@ -70,6 +81,16 @@ public class RecordService {
                 .orElseThrow(IllegalStateException::new); // exception
 
         record.updateRecord(request.getAlCnt(), request.getHangOver(), request.getRecordMemo()); // update
+
+        List<AlcoholRequestDto> alcoholList = request.getAlcoholRequest(); // set AlcoholList
+
+        for (AlcoholRequestDto alcoholRequestDto: alcoholList){
+            Alcohol alcohol = alcoholRepository.save(alcoholMapper.toAlcoholEntity(alcoholRequestDto));
+            alcohol.updateAlcohol(alcohol.getAlcoholName(), alcohol.getDegree(),
+                                    alcohol.getPrice(), alcohol.getVolume(),
+                                    alcohol.getAlcoholType(), alcohol.getRecord());
+        }
+        record.getAlcohols();
 
         return recordMapper.toResponse(record);
     }

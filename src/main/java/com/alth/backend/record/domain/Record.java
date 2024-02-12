@@ -2,6 +2,7 @@ package com.alth.backend.record.domain;
 
 
 import com.alth.backend.global.BaseTimeEntity;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -36,9 +37,11 @@ public class Record extends BaseTimeEntity {
     @Builder.Default
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
 
+
     @Builder.Default
     @OneToMany(mappedBy = "record", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Alcohol> alcohols = new ArrayList<>();
+
 
     @Builder.Default
     @OneToMany(mappedBy = "record", cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -57,6 +60,12 @@ public class Record extends BaseTimeEntity {
     }
 
     public void updateRecord(int alCnt, Feels hangOver, String recordMemo){
+        this.alCnt = alCnt;
+        this.hangOver = hangOver;
+        this.recordMemo = recordMemo;
+    }
+
+    public void createRecord(int alCnt, Feels hangOver, String recordMemo){
         this.alCnt = alCnt;
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;

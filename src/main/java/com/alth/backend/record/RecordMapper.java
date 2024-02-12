@@ -7,6 +7,7 @@ import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,13 +15,28 @@ import java.util.stream.Collectors;
 public class RecordMapper {
 
     public Record toEntity(RecordRequestDto request){
-        return Record.builder()
+        Record.RecordBuilder builder = Record.builder()
                 .alCnt(request.getAlCnt())
                 .hangOver(request.getHangOver())
-                .recordMemo(request.getRecordMemo())
-                .alcohols(request.getAlcohols())
-                .build();
+                .recordMemo(request.getRecordMemo());
+
+        List<Alcohol> alcoholsInMap = Collections.emptyList();
+        List<AlcoholRequestDto> alcoholRequests = request.getAlcoholRequest();
+        if (alcoholRequests != null) {
+            alcoholsInMap = alcoholRequests.stream()
+                    .map(alcoholRequestDto -> Alcohol.builder()
+                            .alcoholName(alcoholRequestDto.getAlcoholName())
+                            .degree(alcoholRequestDto.getDegree())
+                            .price(alcoholRequestDto.getPrice())
+                            .volume(alcoholRequestDto.getVolume())
+                            .alcoholType(alcoholRequestDto.getAlcoholType())
+                            .build())
+                    .collect(Collectors.toList());
+        }
+
+        return builder.alcohols(alcoholsInMap).build();
     }
+
 
 
 
@@ -38,7 +54,7 @@ public class RecordMapper {
                 .alCnt(record.getAlCnt())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
-                .alcohols(record.getAlcohols())
+                .alcoholList(record.getAlcohols())
                 .recordWriteTime(record.getCreatedAt())
                 .recordEditTime(record.getUpdatedAt())
                 .build();
@@ -50,5 +66,26 @@ public class RecordMapper {
                 = recordList.stream().map(this::toResponse).collect(Collectors.toList());
 
         return RecordResponseListDto.builder().recordList(recordResponseList).build();
+    }
+
+    public AlcoholResponseListDto toAlcoholsListResponse(List<Alcohol> alcoholList){
+        List<AlcoholResponseDto> alcoholResponseList
+                = alcoholList.stream().map(this::toAlcoholResponse).collect(Collectors.toList());
+
+        return AlcoholResponseListDto.builder().alcoholList(alcoholResponseList).build();
+
+    }
+
+    public AlcoholResponseDto toAlcoholResponse(Alcohol alcohol){
+        return AlcoholResponseDto.builder()
+                .alcoholId(alcohol.getAlcoholId())
+                .record(alcohol.getRecord())
+                .alcoholName(alcohol.getAlcoholName())
+                .degree(alcohol.getDegree())
+                .price(alcohol.getPrice())
+                .volume(alcohol.getVolume())
+                .alcoholType(alcohol.getAlcoholType())
+                .build();
+
     }
 }

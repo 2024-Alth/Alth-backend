@@ -20,7 +20,7 @@ public class RecordResponseDto {
     private int alCnt;
     private Record.Feels hangOver;
     private String recordMemo;
-    private List<Alcohol> alcohols;
+    private List<Alcohol> alcoholList;
 
     private LocalDateTime recordWriteTime;
     private LocalDateTime recordEditTime;
@@ -30,7 +30,7 @@ public class RecordResponseDto {
         this.alCnt = record.getAlCnt();
         this.hangOver = record.getHangOver();
         this.recordMemo = record.getRecordMemo();
-        this.alcohols = record.getAlcohols();
+        this.alcoholList = record.getAlcohols();
         this.recordWriteTime = record.getCreatedAt();
         this.recordEditTime = record.getUpdatedAt();
     }

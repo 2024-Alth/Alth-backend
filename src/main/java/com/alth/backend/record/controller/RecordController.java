@@ -6,6 +6,7 @@ import com.alth.backend.record.dto.request.RecordUpdateDto;
 import com.alth.backend.record.repository.AlcoholRepository;
 import com.alth.backend.record.service.RecordService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,16 @@ public class RecordController {
 
     private final RecordService recordService;
 
-    @PostMapping ("/user/record")  //C
-    public ResponseEntity<RecordResponseIdDto> createRecord(@RequestBody RecordRequestDto request){
-        return ResponseEntity.ok(recordService.createRecord(request));
-    }
+//    @PostMapping ("/user/record")  //C
+//    public ResponseEntity<RecordResponseIdDto> createRecord(@RequestBody RecordRequestDto request){
+//        return ResponseEntity.ok(recordService.createRecord(request));
+//    }
+
+    @PostMapping("/user/record")
+    public ResponseEntity<String> createRecordWithAlcohol(@RequestBody RecordRequestDto request){
+        recordService.createRecordWithAlcohol(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Record Created");
+    } // 0212
 
     @GetMapping ("/user/record") //R -  List
     public ResponseEntity<RecordResponseListDto> findAll(){

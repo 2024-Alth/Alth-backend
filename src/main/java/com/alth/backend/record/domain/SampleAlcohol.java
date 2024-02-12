@@ -18,7 +18,7 @@ public class SampleAlcohol {
     private Long alcoholId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "record_id")
+    @JoinColumn(name = "record_id", nullable = true)
     private Record record;
 
     @Column(length = 50, nullable = false)

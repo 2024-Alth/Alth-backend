@@ -25,7 +25,7 @@ public class Alcohol {
     private Long alcoholId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "record_id")
+    @JoinColumn(name = "record_id", nullable = true)
     private Record record;
 
     @Column(length = 50, nullable = false)
@@ -55,11 +55,23 @@ public class Alcohol {
     }
 
     public void updateAlcohol
-            (String alcoholName, Double degree, int price, int volume, Type alcoholType){
+            (String alcoholName, Double degree, int price, int volume, Type alcoholType, Record record){
         this.alcoholName = alcoholName;
         this.degree = degree;
         this.price = price;
         this.volume = volume;
         this.alcoholType = alcoholType;
+        this.record = record; // add - 0210
+    }
+
+    public Alcohol createAlcohol(String alcoholName, Double degree, int price, int volume, Type alcoholType, Record record){
+        return Alcohol.builder()
+                .alcoholName(alcoholName)
+                .degree(degree)
+                .price(price)
+                .volume(volume)
+                .alcoholType(alcoholType)
+                .record(record)
+                .build();
     }
 }
