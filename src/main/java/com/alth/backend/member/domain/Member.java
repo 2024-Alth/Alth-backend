@@ -2,6 +2,7 @@ package com.alth.backend.member.domain;
 
 import com.alth.backend.global.BaseTimeEntity;
 import com.alth.backend.post.domain.Post;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -53,6 +54,7 @@ public class Member extends BaseTimeEntity {
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     @ManyToMany
     private Set<Authority> authorities;
+
 
     public void update(String nickname, int birth, String name, EnjoyDrink enjoyDrink, String favorLiquor) {
         this.name = name;
