@@ -1,10 +1,13 @@
 package com.alth.backend.member.domain;
 
 import com.alth.backend.global.BaseTimeEntity;
+import com.alth.backend.post.domain.Post;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,6 +43,9 @@ public class Member extends BaseTimeEntity {
     private String favorLiquor;
 
     private Boolean isDeleted;
+
+    @OneToMany(mappedBy = "member")
+    private final List<Post> posts = new ArrayList<>();
 
     @JoinTable(
             name = "user_authority",
