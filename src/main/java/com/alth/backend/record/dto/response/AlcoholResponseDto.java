@@ -18,6 +18,7 @@ public class AlcoholResponseDto {
     private String alcoholName;
     private Double degree;
     private int price;
+    private int alCnt;
     private int volume;
     private Alcohol.Type alcoholType;
 
@@ -27,6 +28,7 @@ public class AlcoholResponseDto {
         this.alcoholName = alcohol.getAlcoholName();
         this.degree = alcohol.getDegree();
         this.price = alcohol.getPrice();
+        this.alCnt = alcohol.getAlCnt();
         this.volume = alcohol.getVolume();
         this.alcoholType = alcohol.getAlcoholType();
     }

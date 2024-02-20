@@ -5,6 +5,7 @@ import com.alth.backend.record.domain.Record;
 import com.alth.backend.record.dto.response.AlcoholResponseListDto;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -13,9 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class RecordRequestDto {
-    private int alCnt;
+    private int totalCnt;
     private Record.Feels hangOver;
     private String recordMemo;
-    private List<AlcoholRequestDto> alcoholRequest;
-    private List<AlcoholResponseListDto> alcoholResponseListDto;
+    private List<AlcoholRequestDto> alcoholRequest = new ArrayList<>();
+    private List<AlcoholResponseListDto> alcoholResponseListDto = new ArrayList<>();
 }

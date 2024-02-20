@@ -18,6 +18,7 @@ public class AlcoholUpdateDto {
     private String alcoholName;
     private Double degree;
     private int price;
+    private int alCnt;
     private int volume;
     private Alcohol.Type alcoholType;
 }

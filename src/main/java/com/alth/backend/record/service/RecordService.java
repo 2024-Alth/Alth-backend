@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,23 +28,26 @@ public class RecordService {
     private final AlcoholMapper alcoholMapper;
 
     //C
-//    public RecordResponseIdDto createRecord(RecordRequestDto request){
-//        Record record = recordRepository.save(recordMapper.toEntity(request)); //save
-//        record.getAlcohols().forEach(alcohol -> alcohol.setRecord(record)); // set alcohol - recordId
-//        RecordResponseIdDto recordResponseIdDto = recordMapper.toResponseId(record); //ret
-//
-//        return recordResponseIdDto;
-//    }
+    public RecordResponseDto createRecordWithAlcohol(RecordRequestDto request){
+        Record record = Record.builder()
+                .totalCnt(request.getTotalCnt())
+                .hangOver(request.getHangOver())
+                .recordMemo(request.getRecordMemo())
+                .build();
 
-    public void createRecordWithAlcohol(RecordRequestDto request){
-        Record record = recordRepository.save(recordMapper.toEntity(request)); //save - record
-        List<AlcoholRequestDto> alcoholList = request.getAlcoholRequest(); // set AlcoholList
-        for (AlcoholRequestDto alcoholRequestDto: alcoholList){
-            Alcohol alcohol = alcoholRepository.save(alcoholMapper.toAlcoholEntity(alcoholRequestDto));
-            alcohol.setRecord(record);
-        }
-        recordRepository.save(record);
+        List<Alcohol> alcohols = request.getAlcoholRequest().stream()
+                .map(dto -> new Alcohol(record, dto.getAlcoholName(), dto.getDegree(),
+                        dto.getPrice(), dto.getAlCnt(), dto.getVolume(), dto.getAlcoholType()))
+                .collect(Collectors.toList());
+
+        alcohols.forEach(record::addAlcohol);
+
+        Record savedRecord = recordRepository.save(record);
+
+        return recordMapper.fromEntity(savedRecord);
     }
+
+
 
     //R - List
     public RecordResponseListDto findAll(){
@@ -68,7 +72,6 @@ public class RecordService {
 
         List<Alcohol> alcohols = alcoholRepository.findAlcoholEachRecord(id);
 
-
         return recordMapper.toAlcoholsListResponse(alcohols);
     }
 
@@ -80,17 +83,19 @@ public class RecordService {
         Record record = recordRepository.findById(request.getRecordId()) //find
                 .orElseThrow(IllegalStateException::new); // exception
 
-        record.updateRecord(request.getAlCnt(), request.getHangOver(), request.getRecordMemo()); // update
+        record.updateRecord(request.getTotalCnt(), request.getHangOver(), request.getRecordMemo()); // update
 
         List<AlcoholRequestDto> alcoholList = request.getAlcoholRequest(); // set AlcoholList
 
         for (AlcoholRequestDto alcoholRequestDto: alcoholList){
             Alcohol alcohol = alcoholRepository.save(alcoholMapper.toAlcoholEntity(alcoholRequestDto));
+
             alcohol.updateAlcohol(alcohol.getAlcoholName(), alcohol.getDegree(),
-                                    alcohol.getPrice(), alcohol.getVolume(),
+                                    alcohol.getPrice(), alcohol.getAlCnt(), alcohol.getVolume(),
                                     alcohol.getAlcoholType(), alcohol.getRecord());
         }
         record.getAlcohols();
+        Record savedRecord = recordRepository.save(record);
 
         return recordMapper.toResponse(record);
     }

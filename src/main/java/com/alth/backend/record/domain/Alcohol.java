@@ -35,6 +35,8 @@ public class Alcohol {
 
     private int price;
 
+    private int alCnt;
+
     private int volume;
 
     @Enumerated(EnumType.STRING)
@@ -55,23 +57,36 @@ public class Alcohol {
     }
 
     public void updateAlcohol
-            (String alcoholName, Double degree, int price, int volume, Type alcoholType, Record record){
+            (String alcoholName, Double degree, int price, int alCnt, int volume, Type alcoholType, Record record){
         this.alcoholName = alcoholName;
         this.degree = degree;
         this.price = price;
+        this.alCnt = alCnt;
         this.volume = volume;
         this.alcoholType = alcoholType;
         this.record = record; // add - 0210
     }
 
-    public Alcohol createAlcohol(String alcoholName, Double degree, int price, int volume, Type alcoholType, Record record){
+    public Alcohol createAlcohol(String alcoholName, Double degree, int price, int alCnt, int volume, Type alcoholType, Record record){
         return Alcohol.builder()
                 .alcoholName(alcoholName)
                 .degree(degree)
                 .price(price)
+                .alCnt(alCnt)
                 .volume(volume)
                 .alcoholType(alcoholType)
                 .record(record)
                 .build();
+    }
+
+    @Builder
+    public Alcohol(Record record, String alcoholName, Double degree, int price, int alCnt, int volume, Type alcoholType) {
+        this.record = record;
+        this.alcoholName = alcoholName;
+        this.degree = degree;
+        this.price = price;
+        this.alCnt = alCnt;
+        this.volume = volume;
+        this.alcoholType = alcoholType;
     }
 }

@@ -17,20 +17,20 @@ import java.util.List;
 public class RecordResponseDto {
 
     private Long recordId;
-    private int alCnt;
+    private int totalCnt;
     private Record.Feels hangOver;
     private String recordMemo;
-    private List<Alcohol> alcoholList;
+    private List<Alcohol> alcohols;
 
     private LocalDateTime recordWriteTime;
     private LocalDateTime recordEditTime;
 
     public RecordResponseDto(Record record) {
         this.recordId = record.getRecordId();
-        this.alCnt = record.getAlCnt();
+        this.totalCnt = record.getTotalCnt();
         this.hangOver = record.getHangOver();
         this.recordMemo = record.getRecordMemo();
-        this.alcoholList = record.getAlcohols();
+        this.alcohols = record.getAlcohols();
         this.recordWriteTime = record.getCreatedAt();
         this.recordEditTime = record.getUpdatedAt();
     }

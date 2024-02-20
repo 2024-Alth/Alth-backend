@@ -14,27 +14,13 @@ import java.util.stream.Collectors;
 @Component
 public class RecordMapper {
 
-    public Record toEntity(RecordRequestDto request){
-        Record.RecordBuilder builder = Record.builder()
-                .alCnt(request.getAlCnt())
-                .hangOver(request.getHangOver())
-                .recordMemo(request.getRecordMemo());
-
-        List<Alcohol> alcoholsInMap = Collections.emptyList();
-        List<AlcoholRequestDto> alcoholRequests = request.getAlcoholRequest();
-        if (alcoholRequests != null) {
-            alcoholsInMap = alcoholRequests.stream()
-                    .map(alcoholRequestDto -> Alcohol.builder()
-                            .alcoholName(alcoholRequestDto.getAlcoholName())
-                            .degree(alcoholRequestDto.getDegree())
-                            .price(alcoholRequestDto.getPrice())
-                            .volume(alcoholRequestDto.getVolume())
-                            .alcoholType(alcoholRequestDto.getAlcoholType())
-                            .build())
-                    .collect(Collectors.toList());
-        }
-
-        return builder.alcohols(alcoholsInMap).build();
+    public RecordResponseDto fromEntity(Record record){
+        return RecordResponseDto.builder()
+                .recordId(record.getRecordId())
+                .totalCnt(record.getTotalCnt())
+                .hangOver(record.getHangOver())
+                .recordMemo(record.getRecordMemo())
+                .build();
     }
 
 
@@ -51,15 +37,14 @@ public class RecordMapper {
     public RecordResponseDto toResponse(Record record){
         return RecordResponseDto.builder()
                 .recordId(record.getRecordId())
-                .alCnt(record.getAlCnt())
+                .totalCnt(record.getTotalCnt())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
-                .alcoholList(record.getAlcohols())
+                .alcohols(record.getAlcohols())
                 .recordWriteTime(record.getCreatedAt())
                 .recordEditTime(record.getUpdatedAt())
                 .build();
     }
-
 
     public RecordResponseListDto toListResponse(List<Record> recordList){
         List<RecordResponseDto> recordResponseList

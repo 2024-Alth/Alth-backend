@@ -17,16 +17,11 @@ public class RecordController {
 
     private final RecordService recordService;
 
-//    @PostMapping ("/user/record")  //C
-//    public ResponseEntity<RecordResponseIdDto> createRecord(@RequestBody RecordRequestDto request){
-//        return ResponseEntity.ok(recordService.createRecord(request));
-//    }
-
     @PostMapping("/user/record")
-    public ResponseEntity<String> createRecordWithAlcohol(@RequestBody RecordRequestDto request){
-        recordService.createRecordWithAlcohol(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Record Created");
-    } // 0212
+    public ResponseEntity<RecordResponseDto> createRecordWithAlcohol(@RequestBody RecordRequestDto request){
+        RecordResponseDto response = recordService.createRecordWithAlcohol(request);
+        return ResponseEntity.ok(response);
+    } // 0214
 
     @GetMapping ("/user/record") //R -  List
     public ResponseEntity<RecordResponseListDto> findAll(){

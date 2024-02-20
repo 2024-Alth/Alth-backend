@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AlcoholRepository extends JpaRepository<Alcohol, Long> {
-    @Query("select a from Alcohol a where a.record = :id")
+    @Query("select a from Alcohol a where a.record.recordId = :id")
     List<Alcohol> findAlcoholEachRecord(@Param("id") Long id);
-
-    @Query("select a from Alcohol  a where a.record = :id")
-    Optional<Alcohol> findByRecordId(Long id);
 
 }

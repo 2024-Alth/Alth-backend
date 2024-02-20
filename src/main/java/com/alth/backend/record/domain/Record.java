@@ -26,7 +26,7 @@ public class Record extends BaseTimeEntity {
     @Column(nullable = false, updatable = false)
     private Long recordId;
 
-    private int alCnt;
+    private int totalCnt;
 
     @Enumerated(EnumType.STRING)
     private Feels hangOver;
@@ -48,10 +48,7 @@ public class Record extends BaseTimeEntity {
     private List<SampleAlcohol> sampleAlcohols = new ArrayList<>();
 
     public enum Feels {
-        ALIVE,
-        LITTLE,
-        FULLY,
-        DEATH //sat as 4 type(changeable)
+        ALIVE, LITTLE, FULLY, DEATH //sat as 4 type(changeable)
     }
 
     public void delete() {
@@ -59,15 +56,26 @@ public class Record extends BaseTimeEntity {
         this.getAlcohols().forEach(alcohol -> alcohol.delete());
     }
 
-    public void updateRecord(int alCnt, Feels hangOver, String recordMemo){
-        this.alCnt = alCnt;
+    public void updateRecord(int totalCnt, Feels hangOver, String recordMemo){
+        this.totalCnt = totalCnt;
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;
     }
 
-    public void createRecord(int alCnt, Feels hangOver, String recordMemo){
-        this.alCnt = alCnt;
+    public void createRecord(int totalCnt, Feels hangOver, String recordMemo){
+        this.totalCnt = totalCnt;
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;
+    }
+
+    @Builder
+    public Record(int totalCnt, Feels hangOver, String recordMemo) {
+        this.totalCnt = totalCnt;
+        this.hangOver = hangOver;
+        this.recordMemo = recordMemo;
+    }
+
+    public void addAlcohol(Alcohol alcohol){
+        this.alcohols.add(alcohol);
     }
 }
