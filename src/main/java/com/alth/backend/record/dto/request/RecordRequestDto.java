@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class RecordRequestDto {
     private int totalCnt;
     private Feel hangOver;

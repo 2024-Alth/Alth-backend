@@ -37,7 +37,7 @@ public class Record extends BaseTimeEntity {
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
 
 
-    @Builder.Default
+
     @OneToMany(mappedBy = "record", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alcohol> alcohols = new ArrayList<>();
 

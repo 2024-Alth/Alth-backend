@@ -8,7 +8,6 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class AlcoholRequestDto {
     private String alcoholName;
     private Double degree;
