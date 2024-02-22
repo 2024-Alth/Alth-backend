@@ -1,6 +1,7 @@
 package com.alth.backend.post.dto;
 
 import com.alth.backend.member.domain.EnjoyDrink;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,5 +17,6 @@ public class PostList {
     private Long id;
     private String title;
     private EnjoyDrink enjoyDrink;
+    @JsonFormat(pattern = "yyyy-HH-mm HH:mm:ss")
     private LocalDateTime CreateAt;
 }

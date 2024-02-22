@@ -63,7 +63,7 @@ public class PostController {
     }
 
     @GetMapping("/post/search/{keyword}")
-    @Operation(summary = "get postInfo", description = "게시물을 조회한다.")
+    @Operation(summary = "search post", description = "게시물을 검색한다.")
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "성공"))
     public ResponseEntity<List<PostResponse>> getPostByKeyword(@PathVariable("keyword") String keyword) {
         return ResponseEntity.ok(postService.getPostSearch(keyword));

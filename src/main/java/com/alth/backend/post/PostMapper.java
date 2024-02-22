@@ -44,6 +44,7 @@ public class PostMapper {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .enjoyDrink(post.getEnjoyDrink())
+                .createAt(post.getCreatedAt())
                 .nickname(post.getMember().getNickname())
                 .build();
     }
@@ -56,6 +57,7 @@ public class PostMapper {
                 .id(post.getId())
                 .content(post.getContent())
                 .enjoyDrink(post.getEnjoyDrink())
+                .createAt(post.getCreatedAt())
                 .nickname(post.getMember().getNickname())
                 .build()).collect(Collectors.toList());
     }

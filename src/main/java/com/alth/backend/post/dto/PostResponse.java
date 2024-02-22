@@ -2,10 +2,13 @@ package com.alth.backend.post.dto;
 
 
 import com.alth.backend.member.domain.EnjoyDrink;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -19,4 +22,6 @@ public class PostResponse {
     private Integer likeCount;
     private EnjoyDrink enjoyDrink;
     private String nickname;
+    @JsonFormat(pattern = "yyyy-HH-mm HH:mm:ss")
+    private LocalDateTime createAt;
 }
