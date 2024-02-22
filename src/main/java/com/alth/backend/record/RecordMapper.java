@@ -1,8 +1,8 @@
 package com.alth.backend.record;
 
-import com.alth.backend.Alcohol.dto.response.AlcoholResponseDto;
-import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
-import com.alth.backend.Alcohol.domain.Alcohol;
+import com.alth.backend.alcohol.dto.response.AlcoholResponseDto;
+import com.alth.backend.alcohol.dto.response.AlcoholResponseListDto;
+import com.alth.backend.alcohol.domain.Alcohol;
 import com.alth.backend.record.domain.Record;
 import com.alth.backend.record.dto.response.*;
 import org.springframework.stereotype.Component;

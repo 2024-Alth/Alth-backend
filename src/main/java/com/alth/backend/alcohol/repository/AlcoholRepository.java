@@ -1,7 +1,6 @@
-package com.alth.backend.Alcohol.repository;
+package com.alth.backend.alcohol.repository;
 
-import com.alth.backend.Alcohol.domain.Alcohol;
-import com.alth.backend.Alcohol.dto.request.AlcoholRequestDto;
+import com.alth.backend.alcohol.domain.Alcohol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

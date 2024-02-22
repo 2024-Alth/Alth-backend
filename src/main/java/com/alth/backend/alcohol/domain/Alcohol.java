@@ -1,4 +1,4 @@
-package com.alth.backend.Alcohol.domain;
+package com.alth.backend.alcohol.domain;
 
 import com.alth.backend.record.domain.Record;
 import jakarta.persistence.*;

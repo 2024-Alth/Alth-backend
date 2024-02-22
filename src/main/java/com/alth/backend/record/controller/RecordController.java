@@ -1,6 +1,6 @@
 package com.alth.backend.record.controller;
 
-import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
+import com.alth.backend.alcohol.dto.response.AlcoholResponseListDto;
 import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
 import com.alth.backend.record.dto.request.RecordUpdateDto;

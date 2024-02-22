@@ -1,4 +1,4 @@
-package com.alth.backend.Alcohol.domain;
+package com.alth.backend.alcohol.domain;
 
 public enum Types {      // any other thing
     SOJU(1),

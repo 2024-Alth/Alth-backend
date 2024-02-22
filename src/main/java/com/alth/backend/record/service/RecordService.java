@@ -1,22 +1,21 @@
 package com.alth.backend.record.service;
 
-import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
-import com.alth.backend.Alcohol.AlcoholMapper;
+import com.alth.backend.alcohol.dto.response.AlcoholResponseListDto;
+import com.alth.backend.alcohol.AlcoholMapper;
 import com.alth.backend.record.RecordMapper;
-import com.alth.backend.Alcohol.domain.Alcohol;
+import com.alth.backend.alcohol.domain.Alcohol;
 import com.alth.backend.record.domain.Record;
-import com.alth.backend.Alcohol.dto.request.AlcoholRequestDto;
+import com.alth.backend.alcohol.dto.request.AlcoholRequestDto;
 import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
 import com.alth.backend.record.dto.request.RecordUpdateDto;
-import com.alth.backend.Alcohol.repository.AlcoholRepository;
+import com.alth.backend.alcohol.repository.AlcoholRepository;
 import com.alth.backend.record.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

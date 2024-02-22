@@ -1,10 +1,10 @@
-package com.alth.backend.Alcohol;
+package com.alth.backend.alcohol;
 
-import com.alth.backend.Alcohol.dto.response.AlcoholResponseDto;
-import com.alth.backend.Alcohol.dto.response.AlcoholResponseIdDto;
-import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
-import com.alth.backend.Alcohol.domain.Alcohol;
-import com.alth.backend.Alcohol.dto.request.AlcoholRequestDto;
+import com.alth.backend.alcohol.dto.response.AlcoholResponseDto;
+import com.alth.backend.alcohol.dto.response.AlcoholResponseIdDto;
+import com.alth.backend.alcohol.dto.response.AlcoholResponseListDto;
+import com.alth.backend.alcohol.domain.Alcohol;
+import com.alth.backend.alcohol.dto.request.AlcoholRequestDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,11 +1,10 @@
-package com.alth.backend.Alcohol.dto.response;
+package com.alth.backend.alcohol.dto.response;
 
-import com.alth.backend.Alcohol.domain.Alcohol;
-import com.alth.backend.Alcohol.domain.Types;
+import com.alth.backend.alcohol.domain.Alcohol;
+import com.alth.backend.alcohol.domain.Types;
 import com.alth.backend.record.domain.Record;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder

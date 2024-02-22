@@ -1,14 +1,17 @@
-package com.alth.backend.Alcohol.dto.request;
+package com.alth.backend.alcohol.dto.request;
 
-import com.alth.backend.Alcohol.domain.Alcohol;
-import com.alth.backend.Alcohol.domain.Types;
+import com.alth.backend.alcohol.domain.Types;
+import com.alth.backend.record.domain.Record;
 import lombok.*;
 
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AlcoholRequestDto {
+@Data
+public class AlcoholUpdateDto {
+    private Long alcoholId;
+    private Record record;
     private String alcoholName;
     private Double degree;
     private int price;
