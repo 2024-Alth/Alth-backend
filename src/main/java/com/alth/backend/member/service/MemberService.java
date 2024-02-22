@@ -7,9 +7,15 @@ import com.alth.backend.member.domain.Member;
 import com.alth.backend.member.dto.MemberResponse;
 import com.alth.backend.member.dto.MemberSignInRequest;
 import com.alth.backend.member.dto.MemberUpdateRequest;
+import com.alth.backend.post.PostMapper;
+import com.alth.backend.post.domain.Post;
+import com.alth.backend.post.dto.PostResponse;
+import com.alth.backend.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +23,8 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final MemberMapper memberMapper;
+    private final PostRepository postRepository;
+    private final PostMapper postMapper;
 
     @Transactional
     public String signIn(MemberSignInRequest request) {
@@ -60,5 +68,12 @@ public class MemberService {
 
         memberRepository.delete(member);
         return "탈퇴되었습니다.";
+    }
+
+    public List<PostResponse> getMemberPosts() {
+        Member member = getMember();
+
+        List<Post> posts = postRepository.findAllByMember(member);
+        return postMapper.toListResponse(posts);
     }
 }
