@@ -1,5 +1,6 @@
 package com.alth.backend.post.service;
 
+import com.alth.backend.comment.repository.CommentRepository;
 import com.alth.backend.member.domain.EnjoyDrink;
 import com.alth.backend.member.domain.Member;
 import com.alth.backend.member.service.MemberService;
@@ -28,8 +29,10 @@ public class PostService {
     private final MemberService memberService;
     private final PostMapper postMapper;
     private final PostValidator postValidator;
+    private final CommentRepository commentRepository;
 
     @Transactional
+
     public Long create(PostCreateRequest request) {
         Member member = memberService.getMember();
 
@@ -50,12 +53,14 @@ public class PostService {
         Member member = memberService.getMember();
 
         Post post = postRepository.findByMemberAndId(member, id);
+        if (member != post.getMember()) {
+            throw new RuntimeException("Not Equal Member");
+        }
         postValidator.postExistValid(post);
         post.update(request.getTitle(), request.getContent());
         return "정상적으로 수정되었습니다.";
     }
 
-    @Transactional
     public PostResponse getPost(Long id) {
         Post post = postRepository.findById(id).orElseThrow(IllegalStateException::new);
         post.updateView();
