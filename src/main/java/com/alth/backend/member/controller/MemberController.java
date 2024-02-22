@@ -4,6 +4,7 @@ import com.alth.backend.config.security.jwt.JwtFilter;
 import com.alth.backend.config.security.jwt.TokenProvider;
 import com.alth.backend.member.dto.*;
 import com.alth.backend.member.service.MemberService;
+import com.alth.backend.post.dto.PostResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -18,6 +19,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -73,5 +76,13 @@ public class MemberController {
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "성공"))
     public ResponseEntity<String> deleteMember() {
         return ResponseEntity.ok(memberService.delete());
+    }
+
+    @GetMapping("/mypage/posts")
+    @Operation(summary = "Member Find MyPost", description = "회원이 자신이 작성한 게시물을 열람한다.")
+    @ApiResponses(value = @ApiResponse(responseCode = "200", description = "성공"))
+    public ResponseEntity<List<PostResponse>> getMyPosts() {
+
+        return ResponseEntity.ok(memberService.getMemberPosts());
     }
 }
