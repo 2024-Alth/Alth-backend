@@ -1,6 +1,7 @@
 package com.alth.backend.record.dto.response;
 
-import com.alth.backend.record.domain.Alcohol;
+import com.alth.backend.Alcohol.domain.Alcohol;
+import com.alth.backend.record.domain.Feel;
 import com.alth.backend.record.domain.Record;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ public class RecordResponseDto {
 
     private Long recordId;
     private int totalCnt;
-    private Record.Feels hangOver;
+    private Feel hangOver;
     private String recordMemo;
     private List<Alcohol> alcohols;
 

@@ -1,6 +1,7 @@
-package com.alth.backend.record.dto.response;
+package com.alth.backend.Alcohol.dto.response;
 
-import com.alth.backend.record.domain.Alcohol;
+import com.alth.backend.Alcohol.domain.Alcohol;
+import com.alth.backend.Alcohol.domain.Types;
 import com.alth.backend.record.domain.Record;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,7 @@ public class AlcoholResponseDto {
     private int price;
     private int alCnt;
     private int volume;
-    private Alcohol.Type alcoholType;
+    private Types alcoholType;
 
     public AlcoholResponseDto(Alcohol alcohol) {
         this.alcoholId = alcohol.getAlcoholId();

@@ -1,19 +1,16 @@
-package com.alth.backend.record.domain;
+package com.alth.backend.Alcohol.domain;
 
+import com.alth.backend.record.domain.Record;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 @Getter
-@Setter
 @SQLDelete(sql = "UPDATE alcohol SET is_deleted = true WHERE alcohol_id =  ?")
 @Where(clause = "is_deleted = false")
 @ToString(exclude = "record")
@@ -40,24 +37,17 @@ public class Alcohol {
     private int volume;
 
     @Enumerated(EnumType.STRING)
-    private Type alcoholType;
+    private Types alcoholType;
 
     @Builder.Default
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
-
-    public enum Type {
-        SOJU,
-        BEER,
-        MAKGEOLLI,
-        ETC // any other thing
-    }
 
     public void delete() {
         this.isDeleted = true;
     }
 
     public void updateAlcohol
-            (String alcoholName, Double degree, int price, int alCnt, int volume, Type alcoholType, Record record){
+            (String alcoholName, Double degree, int price, int alCnt, int volume, Types alcoholType, Record record){
         this.alcoholName = alcoholName;
         this.degree = degree;
         this.price = price;
@@ -67,20 +57,8 @@ public class Alcohol {
         this.record = record; // add - 0210
     }
 
-    public Alcohol createAlcohol(String alcoholName, Double degree, int price, int alCnt, int volume, Type alcoholType, Record record){
-        return Alcohol.builder()
-                .alcoholName(alcoholName)
-                .degree(degree)
-                .price(price)
-                .alCnt(alCnt)
-                .volume(volume)
-                .alcoholType(alcoholType)
-                .record(record)
-                .build();
-    }
-
     @Builder
-    public Alcohol(Record record, String alcoholName, Double degree, int price, int alCnt, int volume, Type alcoholType) {
+    public Alcohol(Record record, String alcoholName, Double degree, int price, int alCnt, int volume, Types alcoholType) {
         this.record = record;
         this.alcoholName = alcoholName;
         this.degree = degree;

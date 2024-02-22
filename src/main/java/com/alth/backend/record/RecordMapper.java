@@ -1,13 +1,12 @@
 package com.alth.backend.record;
 
-import com.alth.backend.record.domain.Alcohol;
+import com.alth.backend.Alcohol.dto.response.AlcoholResponseDto;
+import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
+import com.alth.backend.Alcohol.domain.Alcohol;
 import com.alth.backend.record.domain.Record;
-import com.alth.backend.record.dto.request.AlcoholRequestDto;
 import com.alth.backend.record.dto.response.*;
-import com.alth.backend.record.dto.request.RecordRequestDto;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,16 +22,11 @@ public class RecordMapper {
                 .build();
     }
 
-
-
-
-
     public RecordResponseIdDto toResponseId(Record record){
         return RecordResponseIdDto.builder()
                 .id(record.getRecordId())
                 .build();
     }
-
 
     public RecordResponseDto toResponse(Record record){
         return RecordResponseDto.builder()

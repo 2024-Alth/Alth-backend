@@ -1,9 +1,8 @@
-package com.alth.backend.record.dto.request;
+package com.alth.backend.Alcohol.dto.request;
 
-import com.alth.backend.record.domain.Alcohol;
+import com.alth.backend.Alcohol.domain.Alcohol;
+import com.alth.backend.Alcohol.domain.Types;
 import com.alth.backend.record.domain.Record;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
 
 @Builder
@@ -11,11 +10,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AlcoholRequestDto {
+public class AlcoholUpdateDto {
+    private Long alcoholId;
+    private Record record;
     private String alcoholName;
     private Double degree;
     private int price;
     private int alCnt;
     private int volume;
-    private Alcohol.Type alcoholType;
+    private Types alcoholType;
 }

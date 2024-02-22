@@ -1,4 +1,4 @@
-package com.alth.backend.record.dto.response;
+package com.alth.backend.Alcohol.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

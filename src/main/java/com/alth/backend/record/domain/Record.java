@@ -1,8 +1,8 @@
 package com.alth.backend.record.domain;
 
 
+import com.alth.backend.Alcohol.domain.Alcohol;
 import com.alth.backend.global.BaseTimeEntity;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
-@Setter
 @SQLDelete(sql = "UPDATE record SET is_deleted = true WHERE record_id =  ?")
 @Where(clause = "is_deleted = false")
 @ToString
@@ -29,7 +28,7 @@ public class Record extends BaseTimeEntity {
     private int totalCnt;
 
     @Enumerated(EnumType.STRING)
-    private Feels hangOver;
+    private Feel hangOver;
 
     @Column(length = 500, nullable = false)
     private String recordMemo;
@@ -39,37 +38,23 @@ public class Record extends BaseTimeEntity {
 
 
     @Builder.Default
-    @OneToMany(mappedBy = "record", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alcohol> alcohols = new ArrayList<>();
 
-
-    @Builder.Default
-    @OneToMany(mappedBy = "record", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<SampleAlcohol> sampleAlcohols = new ArrayList<>();
-
-    public enum Feels {
-        ALIVE, LITTLE, FULLY, DEATH //sat as 4 type(changeable)
-    }
 
     public void delete() {
         this.isDeleted = true;
         this.getAlcohols().forEach(alcohol -> alcohol.delete());
     }
 
-    public void updateRecord(int totalCnt, Feels hangOver, String recordMemo){
-        this.totalCnt = totalCnt;
-        this.hangOver = hangOver;
-        this.recordMemo = recordMemo;
-    }
-
-    public void createRecord(int totalCnt, Feels hangOver, String recordMemo){
+    public void updateRecord(int totalCnt, Feel hangOver, String recordMemo){
         this.totalCnt = totalCnt;
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;
     }
 
     @Builder
-    public Record(int totalCnt, Feels hangOver, String recordMemo) {
+    public Record(int totalCnt, Feel hangOver, String recordMemo) {
         this.totalCnt = totalCnt;
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;

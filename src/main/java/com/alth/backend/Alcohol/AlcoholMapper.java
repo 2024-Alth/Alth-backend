@@ -1,10 +1,10 @@
-package com.alth.backend.record;
+package com.alth.backend.Alcohol;
 
-import com.alth.backend.record.domain.Alcohol;
-import com.alth.backend.record.domain.Record;
-import com.alth.backend.record.dto.request.AlcoholRequestDto;
-import com.alth.backend.record.dto.request.RecordRequestDto;
-import com.alth.backend.record.dto.response.*;
+import com.alth.backend.Alcohol.dto.response.AlcoholResponseDto;
+import com.alth.backend.Alcohol.dto.response.AlcoholResponseIdDto;
+import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
+import com.alth.backend.Alcohol.domain.Alcohol;
+import com.alth.backend.Alcohol.dto.request.AlcoholRequestDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,6 +21,18 @@ public class AlcoholMapper {
                 .price(request.getPrice())
                 .volume(request.getVolume())
                 .alcoholType(request.getAlcoholType())
+                .build();
+    }
+
+    public AlcoholResponseDto fromEntity(Alcohol alcohol){
+        return AlcoholResponseDto.builder()
+                .alcoholId(alcohol.getAlcoholId())
+                .alcoholName(alcohol.getAlcoholName())
+                .degree(alcohol.getDegree())
+                .price(alcohol.getPrice())
+                .alCnt(alcohol.getAlCnt())
+                .volume(alcohol.getVolume())
+                .alcoholType(alcohol.getAlcoholType())
                 .build();
     }
 

@@ -1,12 +1,11 @@
 package com.alth.backend.record.controller;
 
+import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
 import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
 import com.alth.backend.record.dto.request.RecordUpdateDto;
-import com.alth.backend.record.repository.AlcoholRepository;
 import com.alth.backend.record.service.RecordService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,7 @@ public class RecordController {
     public ResponseEntity<RecordResponseDto> createRecordWithAlcohol(@RequestBody RecordRequestDto request){
         RecordResponseDto response = recordService.createRecordWithAlcohol(request);
         return ResponseEntity.ok(response);
-    } // 0214
+    }
 
     @GetMapping ("/user/record") //R -  List
     public ResponseEntity<RecordResponseListDto> findAll(){

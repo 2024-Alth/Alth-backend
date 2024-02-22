@@ -1,21 +1,22 @@
 package com.alth.backend.record.service;
 
-import com.alth.backend.record.AlcoholMapper;
+import com.alth.backend.Alcohol.dto.response.AlcoholResponseListDto;
+import com.alth.backend.Alcohol.AlcoholMapper;
 import com.alth.backend.record.RecordMapper;
-import com.alth.backend.record.domain.Alcohol;
+import com.alth.backend.Alcohol.domain.Alcohol;
 import com.alth.backend.record.domain.Record;
-import com.alth.backend.record.dto.request.AlcoholRequestDto;
-import com.alth.backend.record.dto.request.AlcoholUpdateDto;
+import com.alth.backend.Alcohol.dto.request.AlcoholRequestDto;
 import com.alth.backend.record.dto.response.*;
 import com.alth.backend.record.dto.request.RecordRequestDto;
 import com.alth.backend.record.dto.request.RecordUpdateDto;
-import com.alth.backend.record.repository.AlcoholRepository;
+import com.alth.backend.Alcohol.repository.AlcoholRepository;
 import com.alth.backend.record.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +29,7 @@ public class RecordService {
     private final AlcoholMapper alcoholMapper;
 
     //C
+    @Transactional
     public RecordResponseDto createRecordWithAlcohol(RecordRequestDto request){
         Record record = Record.builder()
                 .totalCnt(request.getTotalCnt())
@@ -43,10 +45,11 @@ public class RecordService {
         alcohols.forEach(record::addAlcohol);
 
         Record savedRecord = recordRepository.save(record);
+        alcoholRepository.saveAll(alcohols);
+
 
         return recordMapper.fromEntity(savedRecord);
     }
-
 
 
     //R - List
@@ -87,15 +90,24 @@ public class RecordService {
 
         List<AlcoholRequestDto> alcoholList = request.getAlcoholRequest(); // set AlcoholList
 
-        for (AlcoholRequestDto alcoholRequestDto: alcoholList){
-            Alcohol alcohol = alcoholRepository.save(alcoholMapper.toAlcoholEntity(alcoholRequestDto));
 
-            alcohol.updateAlcohol(alcohol.getAlcoholName(), alcohol.getDegree(),
-                                    alcohol.getPrice(), alcohol.getAlCnt(), alcohol.getVolume(),
-                                    alcohol.getAlcoholType(), alcohol.getRecord());
+        if(alcoholList != null){
+            for (AlcoholRequestDto alcoholRequestDto: alcoholList){
+                Alcohol alcohol = alcoholRepository.save(alcoholMapper.toAlcoholEntity(alcoholRequestDto));
+
+                alcohol.updateAlcohol(alcohol.getAlcoholName(), alcohol.getDegree(),
+                        alcohol.getPrice(), alcohol.getAlCnt(), alcohol.getVolume(),
+                        alcohol.getAlcoholType(), alcohol.getRecord());
+
+                alcohol = alcoholRepository.save(alcohol);
+            }
+            record.getAlcohols();
+            Record savedRecord = recordRepository.save(record);
+            //alcoholRepository.saveReq(alcoholList);
+        } else {
+            throw new RuntimeException("error: alcoholList is null");
         }
-        record.getAlcohols();
-        Record savedRecord = recordRepository.save(record);
+
 
         return recordMapper.toResponse(record);
     }
