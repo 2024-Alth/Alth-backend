@@ -1,18 +1,23 @@
 package com.alth.backend.record.domain;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@ToString
+@Getter
 public enum Feel {     //sat as 4 type(changeable)
-    ALIVE(0),
-    LITTLE(1),
-    FULLY(2),
-    DEATH(3);
+    ALIVE,
+    LITTLE,
+    FULLY,
+    DEATH;
 
-    private final int key;
-
-    Feel(int key){
-        this.key = key;
-    }
-
-    public int getKey(){
-        return key;
-    }
+//    private final int key;
+//
+//    Feel(int key){
+//        this.key = key;
+//    }
+//
+//    public int getKey(){
+//        return key;
+//    }
 }

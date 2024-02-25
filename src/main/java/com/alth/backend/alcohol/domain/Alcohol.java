@@ -17,12 +17,12 @@ import org.hibernate.annotations.Where;
 public class Alcohol {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long alcoholId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "record_id", nullable = true)
+    @JoinColumn(name = "record_id")
     private Record record;
 
     @Column(length = 50, nullable = false)

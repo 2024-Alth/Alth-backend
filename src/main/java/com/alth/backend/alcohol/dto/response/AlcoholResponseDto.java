@@ -3,13 +3,12 @@ package com.alth.backend.alcohol.dto.response;
 import com.alth.backend.alcohol.domain.Alcohol;
 import com.alth.backend.alcohol.domain.Types;
 import com.alth.backend.record.domain.Record;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class AlcoholResponseDto {
 
     private Long alcoholId;

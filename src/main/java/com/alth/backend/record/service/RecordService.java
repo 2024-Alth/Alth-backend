@@ -36,14 +36,14 @@ public class RecordService {
                 .recordMemo(request.getRecordMemo())
                 .build();
 
+        Record savedRecord = recordRepository.save(record);
+
         List<Alcohol> alcohols = request.getAlcoholRequest().stream()
-                .map(dto -> new Alcohol(record, dto.getAlcoholName(), dto.getDegree(),
+                .map(dto -> new Alcohol(savedRecord, dto.getAlcoholName(), dto.getDegree(),
                         dto.getPrice(), dto.getAlCnt(), dto.getVolume(), dto.getAlcoholType()))
                 .collect(Collectors.toList());
 
-        alcohols.forEach(record::addAlcohol);
 
-        Record savedRecord = recordRepository.save(record);
         alcoholRepository.saveAll(alcohols);
 
 

@@ -1,18 +1,24 @@
 package com.alth.backend.alcohol.domain;
 
+import lombok.Getter;
+import lombok.ToString;
+
+
+@ToString
+@Getter
 public enum Types {      // any other thing
-    SOJU(1),
-    BEER(2),
-    MAKGEOLLI(3),
-    ETC(4);
+    SOJU,
+    BEER,
+    MAKGEOLLI,
+    ETC;
 
-    private final int key;
-
-    Types(int key){
-        this.key = key;
-    }
-
-    public int getKey(){
-        return key;
-    }
+//    private final int key;
+//
+//    Types(int key){
+//        this.key = key;
+//    }
+//
+//    public int getKey(){
+//        return key;
+//    }
 }

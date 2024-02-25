@@ -21,7 +21,7 @@ import java.util.List;
 @ToString
 public class Record extends BaseTimeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long recordId;
 
@@ -44,7 +44,7 @@ public class Record extends BaseTimeEntity {
 
     public void delete() {
         this.isDeleted = true;
-        this.getAlcohols().forEach(alcohol -> alcohol.delete());
+        //this.getAlcohols().forEach(alcohol -> alcohol.delete());
     }
 
     public void updateRecord(int totalCnt, Feel hangOver, String recordMemo){
@@ -60,7 +60,7 @@ public class Record extends BaseTimeEntity {
         this.recordMemo = recordMemo;
     }
 
-    public void addAlcohol(Alcohol alcohol){
-        this.alcohols.add(alcohol);
-    }
+//    public void addAlcohol(Alcohol alcohol){
+//        this.alcohols.add(alcohol);
+//    }
 }

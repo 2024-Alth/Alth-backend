@@ -19,6 +19,7 @@ public class RecordMapper {
                 .totalCnt(record.getTotalCnt())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
+                .alcohols(record.getAlcohols())
                 .build();
     }
 
