@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor
+//        (access = AccessLevel.PROTECTED)
+//@AllArgsConstructor
 @Getter
 @SQLDelete(sql = "UPDATE record SET is_deleted = true WHERE record_id =  ?")
 @Where(clause = "is_deleted = false")
@@ -25,15 +25,13 @@ public class Record extends BaseTimeEntity {
     @Column(nullable = false, updatable = false)
     private Long recordId;
 
-    private int totalCnt;
-
     @Enumerated(EnumType.STRING)
     private Feel hangOver;
 
     @Column(length = 500, nullable = false)
     private String recordMemo;
 
-    @Builder.Default
+
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
 
 
@@ -44,23 +42,18 @@ public class Record extends BaseTimeEntity {
 
     public void delete() {
         this.isDeleted = true;
-        //this.getAlcohols().forEach(alcohol -> alcohol.delete());
+        this.getAlcohols().forEach(alcohol -> alcohol.delete());
     }
 
-    public void updateRecord(int totalCnt, Feel hangOver, String recordMemo){
-        this.totalCnt = totalCnt;
+    public void updateRecord(Feel hangOver, String recordMemo){
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;
     }
 
     @Builder
-    public Record(int totalCnt, Feel hangOver, String recordMemo) {
-        this.totalCnt = totalCnt;
+    public Record(Feel hangOver, String recordMemo) {
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;
     }
 
-//    public void addAlcohol(Alcohol alcohol){
-//        this.alcohols.add(alcohol);
-//    }
 }

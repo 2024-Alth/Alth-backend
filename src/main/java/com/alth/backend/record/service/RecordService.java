@@ -31,7 +31,6 @@ public class RecordService {
     @Transactional
     public RecordResponseDto createRecordWithAlcohol(RecordRequestDto request){
         Record record = Record.builder()
-                .totalCnt(request.getTotalCnt())
                 .hangOver(request.getHangOver())
                 .recordMemo(request.getRecordMemo())
                 .build();
@@ -85,30 +84,12 @@ public class RecordService {
         Record record = recordRepository.findById(request.getRecordId()) //find
                 .orElseThrow(IllegalStateException::new); // exception
 
-        record.updateRecord(request.getTotalCnt(), request.getHangOver(), request.getRecordMemo()); // update
-
-        List<AlcoholRequestDto> alcoholList = request.getAlcoholRequest(); // set AlcoholList
+        record.updateRecord(request.getHangOver(), request.getRecordMemo()); // update
 
 
-        if(alcoholList != null){
-            for (AlcoholRequestDto alcoholRequestDto: alcoholList){
-                Alcohol alcohol = alcoholRepository.save(alcoholMapper.toAlcoholEntity(alcoholRequestDto));
+        Record savedRecord = recordRepository.save(record);
 
-                alcohol.updateAlcohol(alcohol.getAlcoholName(), alcohol.getDegree(),
-                        alcohol.getPrice(), alcohol.getAlCnt(), alcohol.getVolume(),
-                        alcohol.getAlcoholType(), alcohol.getRecord());
-
-                alcohol = alcoholRepository.save(alcohol);
-            }
-            record.getAlcohols();
-            Record savedRecord = recordRepository.save(record);
-            //alcoholRepository.saveReq(alcoholList);
-        } else {
-            throw new RuntimeException("error: alcoholList is null");
-        }
-
-
-        return recordMapper.toResponse(record);
+        return recordMapper.toResponse(savedRecord);
     }
 
     //D

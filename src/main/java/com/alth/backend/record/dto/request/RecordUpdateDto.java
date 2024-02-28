@@ -15,7 +15,6 @@ import java.util.List;
 @Data
 public class RecordUpdateDto {
     private Long recordId;
-    private int totalCnt;
     private Feel hangOver;
     private String recordMemo;
     private List<Alcohol> alcohols;

@@ -14,13 +14,21 @@ import java.util.stream.Collectors;
 public class RecordMapper {
 
     public RecordResponseDto fromEntity(Record record){
+        List<AlcoholResponseDto> alcoholResponseDtos = record.getAlcohols()
+                .stream()
+                .map(alcohol -> new AlcoholResponseDto(alcohol))
+                .collect(Collectors.toList());
+
         return RecordResponseDto.builder()
                 .recordId(record.getRecordId())
-                .totalCnt(record.getTotalCnt())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
-                .alcohols(record.getAlcohols())
+                .alcohols(alcoholResponseDtos)
                 .build();
+    }
+
+    public AlcoholResponseDto alcoholToDto(Alcohol alcohol) {
+        return new AlcoholResponseDto(alcohol);
     }
 
     public RecordResponseIdDto toResponseId(Record record){
@@ -30,12 +38,16 @@ public class RecordMapper {
     }
 
     public RecordResponseDto toResponse(Record record){
+            List<AlcoholResponseDto> alcoholResponseDtos = record.getAlcohols()
+                    .stream()
+                    .map(alcohol -> new AlcoholResponseDto(alcohol))
+                    .collect(Collectors.toList());
+
         return RecordResponseDto.builder()
                 .recordId(record.getRecordId())
-                .totalCnt(record.getTotalCnt())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
-                .alcohols(record.getAlcohols())
+                .alcohols(alcoholResponseDtos)
                 .recordWriteTime(record.getCreatedAt())
                 .recordEditTime(record.getUpdatedAt())
                 .build();
@@ -59,7 +71,7 @@ public class RecordMapper {
     public AlcoholResponseDto toAlcoholResponse(Alcohol alcohol){
         return AlcoholResponseDto.builder()
                 .alcoholId(alcohol.getAlcoholId())
-                .record(alcohol.getRecord())
+                .recordId(alcohol.getRecord().getRecordId())
                 .alcoholName(alcohol.getAlcoholName())
                 .degree(alcohol.getDegree())
                 .price(alcohol.getPrice())
