@@ -3,6 +3,7 @@ package com.alth.backend.alcohol.dto.response;
 import com.alth.backend.alcohol.domain.Alcohol;
 import com.alth.backend.alcohol.domain.Types;
 import com.alth.backend.record.domain.Record;
+import com.alth.backend.record.dto.response.RecordResponseDto;
 import lombok.*;
 
 @Builder
@@ -12,7 +13,7 @@ import lombok.*;
 public class AlcoholResponseDto {
 
     private Long alcoholId;
-    private Record record;
+    private Long recordId;
     private String alcoholName;
     private Double degree;
     private int price;
@@ -22,7 +23,7 @@ public class AlcoholResponseDto {
 
     public AlcoholResponseDto(Alcohol alcohol) {
         this.alcoholId = alcohol.getAlcoholId();
-        this.record = alcohol.getRecord();
+        this.recordId = alcohol.getRecord() != null ? alcohol.getRecord().getRecordId() : null;
         this.alcoholName = alcohol.getAlcoholName();
         this.degree = alcohol.getDegree();
         this.price = alcohol.getPrice();

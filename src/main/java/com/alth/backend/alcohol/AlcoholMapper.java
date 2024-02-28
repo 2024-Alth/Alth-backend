@@ -47,10 +47,11 @@ public class AlcoholMapper {
     public AlcoholResponseDto toAlcoholResponse(Alcohol alcohol){
         return AlcoholResponseDto.builder()
                 .alcoholId(alcohol.getAlcoholId())
-                .record(alcohol.getRecord())
+                .recordId(alcohol.getRecord().getRecordId())
                 .alcoholName(alcohol.getAlcoholName())
                 .degree(alcohol.getDegree())
                 .price(alcohol.getPrice())
+                .alCnt(alcohol.getAlCnt())
                 .volume(alcohol.getVolume())
                 .alcoholType(alcohol.getAlcoholType())
                 .build();

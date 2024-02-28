@@ -47,14 +47,13 @@ public class Alcohol {
     }
 
     public void updateAlcohol
-            (String alcoholName, Double degree, int price, int alCnt, int volume, Types alcoholType, Record record){
+            (String alcoholName, Double degree, int price, int alCnt, int volume, Types alcoholType){
         this.alcoholName = alcoholName;
         this.degree = degree;
         this.price = price;
         this.alCnt = alCnt;
         this.volume = volume;
         this.alcoholType = alcoholType;
-        this.record = record; // add - 0210
     }
 
     @Builder
