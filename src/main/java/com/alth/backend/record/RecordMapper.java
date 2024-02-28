@@ -23,9 +23,8 @@ public class RecordMapper {
                 .recordId(record.getRecordId())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
+                .recordDate(record.getRecordDate())
                 .alcohols(alcoholResponseDtos)
-                .recordWriteTime(record.getCreatedAt())
-                .recordEditTime(record.getUpdatedAt())
                 .build();
     }
 
@@ -49,9 +48,8 @@ public class RecordMapper {
                 .recordId(record.getRecordId())
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
+                .recordDate(record.getRecordDate())
                 .alcohols(alcoholResponseDtos)
-                .recordWriteTime(record.getCreatedAt())
-                .recordEditTime(record.getUpdatedAt())
                 .build();
     }
 

@@ -6,6 +6,7 @@ import com.alth.backend.record.domain.Feel;
 import com.alth.backend.alcohol.dto.response.AlcoholResponseListDto;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Builder
@@ -17,6 +18,7 @@ public class RecordUpdateDto {
     private Long recordId;
     private Feel hangOver;
     private String recordMemo;
+    private LocalDate recordDate;
     private List<Alcohol> alcohols;
     private List<AlcoholRequestDto> alcoholRequest;
     private List<AlcoholResponseListDto> alcoholResponseListDto;

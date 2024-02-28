@@ -7,7 +7,9 @@ import com.alth.backend.record.domain.Record;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,20 +24,16 @@ public class RecordResponseDto {
     private String recordMemo;
     private List<AlcoholResponseDto> alcohols;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime recordWriteTime;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime recordEditTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate recordDate;
 
     public RecordResponseDto(Record record) {
         this.recordId = record.getRecordId();
         this.hangOver = record.getHangOver();
         this.recordMemo = record.getRecordMemo();
+        this.recordDate = record.getRecordDate();
         this.alcohols = record.getAlcohols().stream()
                 .map(AlcoholResponseDto::new)
                 .collect(Collectors.toList());
-        this.recordWriteTime = record.getCreatedAt();
-        this.recordEditTime = record.getUpdatedAt();
     }
 }

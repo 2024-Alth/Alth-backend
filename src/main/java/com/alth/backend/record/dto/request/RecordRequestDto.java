@@ -4,7 +4,7 @@ import com.alth.backend.alcohol.dto.request.AlcoholRequestDto;
 import com.alth.backend.record.domain.Feel;
 import lombok.*;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -14,5 +14,6 @@ import java.util.List;
 public class RecordRequestDto {
     private Feel hangOver;
     private String recordMemo;
+    private LocalDate recordDate;
     private List<AlcoholRequestDto> alcoholRequest;
 }

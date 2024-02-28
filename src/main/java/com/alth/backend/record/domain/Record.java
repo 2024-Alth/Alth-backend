@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE record SET is_deleted = true WHERE record_id =  ?")
 @Where(clause = "is_deleted = false")
 @ToString
-public class Record extends BaseTimeEntity {
+public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
@@ -34,7 +35,7 @@ public class Record extends BaseTimeEntity {
 
     private boolean isDeleted = Boolean.FALSE; // default - FALSE
 
-
+    private LocalDate recordDate;
 
     @OneToMany(mappedBy = "record", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alcohol> alcohols = new ArrayList<>();
@@ -45,15 +46,17 @@ public class Record extends BaseTimeEntity {
         this.getAlcohols().forEach(alcohol -> alcohol.delete());
     }
 
-    public void updateRecord(Feel hangOver, String recordMemo){
+    public void updateRecord(Feel hangOver, String recordMemo, LocalDate  recordDate){
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;
+        this.recordDate = recordDate;
     }
 
     @Builder
-    public Record(Feel hangOver, String recordMemo) {
+    public Record(Feel hangOver, String recordMemo, LocalDate  recordDate) {
         this.hangOver = hangOver;
         this.recordMemo = recordMemo;
+        this.recordDate = recordDate;
     }
 
 }

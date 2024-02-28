@@ -33,6 +33,8 @@ public class RecordService {
         Record record = Record.builder()
                 .hangOver(request.getHangOver())
                 .recordMemo(request.getRecordMemo())
+                .recordDate(request.getRecordDate())
+                .recordDate(request.getRecordDate())
                 .build();
 
         Record savedRecord = recordRepository.save(record);
@@ -84,7 +86,7 @@ public class RecordService {
         Record record = recordRepository.findById(request.getRecordId()) //find
                 .orElseThrow(IllegalStateException::new); // exception
 
-        record.updateRecord(request.getHangOver(), request.getRecordMemo()); // update
+        record.updateRecord(request.getHangOver(), request.getRecordMemo(), request.getRecordDate()); // update
 
 
         Record savedRecord = recordRepository.save(record);
