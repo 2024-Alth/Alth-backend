@@ -4,6 +4,7 @@ import com.alth.backend.alcohol.domain.Alcohol;
 import com.alth.backend.alcohol.dto.response.AlcoholResponseDto;
 import com.alth.backend.record.domain.Feel;
 import com.alth.backend.record.domain.Record;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,10 @@ public class RecordResponseDto {
     private String recordMemo;
     private List<AlcoholResponseDto> alcohols;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime recordWriteTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime recordEditTime;
 
     public RecordResponseDto(Record record) {

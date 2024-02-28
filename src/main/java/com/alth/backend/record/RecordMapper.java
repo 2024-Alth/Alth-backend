@@ -24,6 +24,8 @@ public class RecordMapper {
                 .hangOver(record.getHangOver())
                 .recordMemo(record.getRecordMemo())
                 .alcohols(alcoholResponseDtos)
+                .recordWriteTime(record.getCreatedAt())
+                .recordEditTime(record.getUpdatedAt())
                 .build();
     }
 
