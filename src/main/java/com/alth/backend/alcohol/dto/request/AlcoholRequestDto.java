@@ -1,7 +1,6 @@
 package com.alth.backend.alcohol.dto.request;
 
 import com.alth.backend.alcohol.domain.Types;
-import com.alth.backend.record.domain.Record;
 import lombok.*;
 
 //@Builder

@@ -2,8 +2,6 @@ package com.alth.backend.alcohol.dto.response;
 
 import com.alth.backend.alcohol.domain.Alcohol;
 import com.alth.backend.alcohol.domain.Types;
-import com.alth.backend.record.domain.Record;
-import com.alth.backend.record.dto.response.RecordResponseDto;
 import lombok.*;
 
 @Builder

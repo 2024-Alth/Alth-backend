@@ -6,12 +6,9 @@ import com.alth.backend.alcohol.dto.request.AlcoholRequestDto;
 import com.alth.backend.alcohol.dto.request.AlcoholUpdateDto;
 import com.alth.backend.alcohol.dto.response.AlcoholResponseDto;
 import com.alth.backend.alcohol.repository.AlcoholRepository;
-import com.alth.backend.record.RecordMapper;
 import com.alth.backend.record.domain.Record;
 import com.alth.backend.record.repository.RecordRepository;
-import com.alth.backend.record.service.RecordService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.Table;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +19,6 @@ public class AlcoholService {
     private final AlcoholRepository alcoholRepository;
     private final RecordRepository recordRepository;
     private final AlcoholMapper alcoholMapper;
-    private final RecordService recordService;
-    private final RecordMapper recordMapper;
 
     // C
     @Transactional
