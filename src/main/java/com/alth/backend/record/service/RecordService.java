@@ -25,7 +25,6 @@ public class RecordService {
     private final RecordRepository recordRepository;
     private final AlcoholRepository alcoholRepository;
     private final RecordMapper recordMapper;
-    private final AlcoholMapper alcoholMapper;
 
     //C
     @Transactional

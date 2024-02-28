@@ -28,15 +28,6 @@ public class RecordMapper {
                 .build();
     }
 
-    public AlcoholResponseDto alcoholToDto(Alcohol alcohol) {
-        return new AlcoholResponseDto(alcohol);
-    }
-
-    public RecordResponseIdDto toResponseId(Record record){
-        return RecordResponseIdDto.builder()
-                .id(record.getRecordId())
-                .build();
-    }
 
     public RecordResponseDto toResponse(Record record){
             List<AlcoholResponseDto> alcoholResponseDtos = record.getAlcohols()
@@ -75,6 +66,7 @@ public class RecordMapper {
                 .alcoholName(alcohol.getAlcoholName())
                 .degree(alcohol.getDegree())
                 .price(alcohol.getPrice())
+                .alCnt(alcohol.getAlCnt())
                 .volume(alcohol.getVolume())
                 .alcoholType(alcohol.getAlcoholType())
                 .build();

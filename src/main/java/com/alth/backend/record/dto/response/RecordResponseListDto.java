@@ -1,6 +1,5 @@
 package com.alth.backend.record.dto.response;
 
-import com.alth.backend.record.dto.response.RecordResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

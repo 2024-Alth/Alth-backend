@@ -2,7 +2,6 @@ package com.alth.backend.record.domain;
 
 
 import com.alth.backend.alcohol.domain.Alcohol;
-import com.alth.backend.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;

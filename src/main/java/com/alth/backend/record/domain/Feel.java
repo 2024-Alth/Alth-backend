@@ -10,14 +10,4 @@ public enum Feel {     //sat as 4 type(changeable)
     LITTLE,
     FULLY,
     DEATH;
-
-//    private final int key;
-//
-//    Feel(int key){
-//        this.key = key;
-//    }
-//
-//    public int getKey(){
-//        return key;
-//    }
 }
