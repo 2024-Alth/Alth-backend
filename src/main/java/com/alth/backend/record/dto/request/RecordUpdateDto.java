@@ -19,7 +19,4 @@ public class RecordUpdateDto {
     private Feel hangOver;
     private String recordMemo;
     private LocalDate recordDate;
-    private List<Alcohol> alcohols;
-    private List<AlcoholRequestDto> alcoholRequest;
-    private List<AlcoholResponseListDto> alcoholResponseListDto;
 }

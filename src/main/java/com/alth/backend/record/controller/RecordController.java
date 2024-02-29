@@ -27,6 +27,9 @@ public class RecordController {
         return ResponseEntity.ok(recordService.findAll());
     }
 
+    @GetMapping("/user/record/all") // R - List only Id, Date
+    public ResponseEntity<RecordResponseIdDateListDto> findAllbyIdDate() { return  ResponseEntity.ok(recordService.findAllWithIdDate()); }
+
     @GetMapping("/user/record/{id}")    //R - each of Record
     public ResponseEntity<RecordResponseDto> findOneRecord(@PathVariable Long id){
         return ResponseEntity.ok(recordService.findOneRecord(id));

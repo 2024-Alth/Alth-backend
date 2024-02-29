@@ -58,6 +58,13 @@ public class RecordService {
         return recordMapper.toListResponse(records);
     }
 
+    //R - List -only Id, recordDate
+    public RecordResponseIdDateListDto findAllWithIdDate(){
+        List<Record> records = recordRepository.findAll();
+
+        return recordMapper.toListIdDateResponse(records);
+    }
+
     //R - each of Record
     public RecordResponseDto findOneRecord(Long id){
         Record record = recordRepository.findById(id)
