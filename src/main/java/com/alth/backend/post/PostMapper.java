@@ -32,7 +32,7 @@ public class PostMapper {
                 id(post.getId())
                 .enjoyDrink(post.getEnjoyDrink())
                 .title(post.getTitle())
-                .CreateAt(post.getCreatedAt())
+                .createAt(post.getCreatedAt())
                 .build());
     }
 

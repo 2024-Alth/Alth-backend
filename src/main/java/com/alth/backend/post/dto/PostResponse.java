@@ -22,6 +22,6 @@ public class PostResponse {
     private Integer likeCount;
     private EnjoyDrink enjoyDrink;
     private String nickname;
-    @JsonFormat(pattern = "yyyy-HH-mm HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createAt;
 }

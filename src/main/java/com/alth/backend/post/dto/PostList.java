@@ -17,6 +17,6 @@ public class PostList {
     private Long id;
     private String title;
     private EnjoyDrink enjoyDrink;
-    @JsonFormat(pattern = "yyyy-HH-mm HH:mm:ss")
-    private LocalDateTime CreateAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createAt;
 }
