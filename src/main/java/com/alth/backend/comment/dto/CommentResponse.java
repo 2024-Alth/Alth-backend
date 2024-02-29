@@ -18,7 +18,7 @@ public class CommentResponse {
     private String content;
     private String writer;
 
-    @JsonFormat(pattern = "yyyy-HH-mm HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-ss HH:mm:ss")
     private LocalDateTime createAt;
     private List<CommentResponse> children = new ArrayList<>();// 대댓글에 대한 정보
 
