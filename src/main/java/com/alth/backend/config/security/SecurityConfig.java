@@ -57,7 +57,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeHttpRequest -> authorizeHttpRequest
                         .requestMatchers("/**").permitAll()
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
-                        // TODO jwt 적용 후 권한 제한 걸어놔야됨
                 )
 
                 .sessionManagement(sessionManagement -> sessionManagement

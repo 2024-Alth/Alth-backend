@@ -1,10 +1,14 @@
 package com.alth.backend.member.domain;
 
 import com.alth.backend.global.BaseTimeEntity;
+import com.alth.backend.post.domain.Post;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,11 +38,15 @@ public class Member extends BaseTimeEntity {
 
     private boolean activated;
 
-    private boolean enjoyDrink;
+    @Enumerated(value = EnumType.STRING)
+    private EnjoyDrink enjoyDrink;
 
     private String favorLiquor;
 
     private Boolean isDeleted;
+
+    @OneToMany(mappedBy = "member")
+    private final List<Post> posts = new ArrayList<>();
 
     @JoinTable(
             name = "user_authority",
@@ -46,4 +54,13 @@ public class Member extends BaseTimeEntity {
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     @ManyToMany
     private Set<Authority> authorities;
+
+
+    public void update(String nickname, int birth, String name, EnjoyDrink enjoyDrink, String favorLiquor) {
+        this.name = name;
+        this.nickname = nickname;
+        this.birth = birth;
+        this.enjoyDrink = enjoyDrink;
+        this.favorLiquor = favorLiquor;
+    }
 }

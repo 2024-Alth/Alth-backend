@@ -26,7 +26,7 @@ public class MemberMapper {
                 .authorities(Collections.singleton(authority))
                 .birth(request.getBirth())
                 .email(request.getEmail())
-                .enjoyDrink(request.isEnjoyDrink())
+                .enjoyDrink(request.getEnjoyDrink())
                 .favorLiquor(request.getFavorLiquor())
                 .name(request.getName())
                 .nickname(request.getNickname())
@@ -46,7 +46,7 @@ public class MemberMapper {
                 .name(member.getName())
                 .favorLiquor(member.getFavorLiquor())
                 .email(member.getEmail())
-                .enjoyDrink(member.isEnjoyDrink())
+                .enjoyDrink(member.getEnjoyDrink().getKorean())
                 .build();
     }
 }
