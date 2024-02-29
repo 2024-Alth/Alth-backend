@@ -12,13 +12,4 @@ public enum Types {      // any other thing
     MAKGEOLLI,
     ETC;
 
-//    private final int key;
-//
-//    Types(int key){
-//        this.key = key;
-//    }
-//
-//    public int getKey(){
-//        return key;
-//    }
 }

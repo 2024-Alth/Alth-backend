@@ -44,11 +44,26 @@ public class RecordMapper {
                 .build();
     }
 
+    public RecordResponseIdDateDto toIdDateResponse(Record record){
+
+        return RecordResponseIdDateDto.builder()
+                .recordId(record.getRecordId())
+                .recordDate(record.getRecordDate())
+                .build();
+    }
+
     public RecordResponseListDto toListResponse(List<Record> recordList){
         List<RecordResponseDto> recordResponseList
                 = recordList.stream().map(this::toResponse).collect(Collectors.toList());
 
         return RecordResponseListDto.builder().recordList(recordResponseList).build();
+    }
+
+    public RecordResponseIdDateListDto toListIdDateResponse(List<Record> recordList){
+        List<RecordResponseIdDateDto> recordResponseList
+                = recordList.stream().map(this::toIdDateResponse).collect(Collectors.toList());
+
+        return RecordResponseIdDateListDto.builder().recordList(recordResponseList).build();
     }
 
     public AlcoholResponseListDto toAlcoholsListResponse(List<Alcohol> alcoholList){
