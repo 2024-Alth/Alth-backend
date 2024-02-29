@@ -18,7 +18,7 @@ public class ReCommentResponse {
     private Long reCommentId;
     private String content;
     private boolean isDeleted;
-    @JsonFormat(pattern = "yyyy-HH-mm HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createAt;
     private String writer;
 
